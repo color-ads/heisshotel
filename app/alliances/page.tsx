@@ -1,5 +1,4 @@
 import { getAlliancesData, getAlliancesSeo } from 'lib/api'
-import { draftMode } from 'next/headers'
 import Component from './Component'
 import { GlobalParams } from 'utils/types/GlobalParams'
 import { notFound } from 'next/navigation'
@@ -10,14 +9,13 @@ export async function generateMetadata(
 	{ params }: GlobalParams,
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
-	const seo = await getAlliancesSeo({ locale: params.lang })
+	const seo = await getAlliancesSeo()
 
 	return generateAppMetadata({ seo, lang: params.lang })
 }
 
 const Experiences = async ({ params: { lang } }: GlobalParams) => {
-	const { isEnabled } = draftMode()
-	const data = await getAlliancesData({ preview: isEnabled, locale: lang })
+	const data = await getAlliancesData()
 
 	if (!data) {
 		notFound()

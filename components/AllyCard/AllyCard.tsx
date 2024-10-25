@@ -1,11 +1,11 @@
-import { Ally, Maybe } from 'utils/types/graphql/graphql'
+import { /* Ally, */ Maybe } from 'utils/types/graphql/graphql'
 import s from './AllyCard.module.scss'
 
 const AllyCard = ({
 	ally,
 	onClick,
 }: {
-	ally: Maybe<Ally>
+	ally: Maybe<any>
 	onClick: () => void
 }) => {
 	return (

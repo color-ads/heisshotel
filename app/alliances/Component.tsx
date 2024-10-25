@@ -1,5 +1,5 @@
 'use client'
-import { Allies, Ally, Maybe } from 'utils/types/graphql/graphql'
+import { /* Allies, Ally, */ Maybe } from 'utils/types/graphql/graphql'
 import s from './page.module.scss'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import AllyCard from 'components/AllyCard/AllyCard'
@@ -22,10 +22,10 @@ import { mapId } from 'utils/constants'
 import { FiMapPin, FiPhone } from 'react-icons/fi'
 import Footer from '@/components/Footer'
 
-const Component = ({ data }: { data: Allies }) => {
-	const [currentAlly, setCurrentAlly] = useState<Maybe<Ally>>()
+const Component = ({ data }: { data: any }) => {
+	const [currentAlly, setCurrentAlly] = useState<Maybe<any>>()
 	const [searchText, setSearchText] = useState('')
-	const [searchResult, setSearchResult] = useState<Maybe<Ally>[]>([])
+	const [searchResult, setSearchResult] = useState<Maybe<any>[]>([])
 	const [currentType, setCurrentType] =
 		useState<keyof typeof titles>('Restaurante')
 	const currentAllies =
@@ -88,7 +88,7 @@ const Component = ({ data }: { data: Allies }) => {
 		setSelectedKey(null)
 	}, [])
 
-	const handleMarkerClick = useCallback((ally: Ally) => {
+	const handleMarkerClick = useCallback((ally: any) => {
 		setSelectedKey(ally.sys.id)
 	}, [])
 
@@ -371,8 +371,8 @@ const Component = ({ data }: { data: Allies }) => {
 }
 
 type Props = AdvancedMarkerProps & {
-	ally: Ally
-	onClickFN: (ally: Ally) => void
+	ally: any
+	onClickFN: (ally: any) => void
 	setMarkerRef: (marker: MarkerType | null, key: string) => void
 }
 const MarkerWithInfoWindow = ({

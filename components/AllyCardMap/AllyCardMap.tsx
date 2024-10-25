@@ -1,4 +1,4 @@
-import { Ally, Maybe } from 'utils/types/graphql/graphql'
+import { /* Ally, */ Maybe } from 'utils/types/graphql/graphql'
 import s from './AllyCardMap.module.scss'
 import { FaSquarePhone } from 'react-icons/fa6'
 import { FaCheck } from 'react-icons/fa'
@@ -12,7 +12,7 @@ const AllyCardMap = ({
 	ally,
 	setSelectedKey,
 }: {
-	ally: Maybe<Ally>
+	ally: Maybe<any>
 	setSelectedKey: Dispatch<SetStateAction<string | null>>
 }) => {
 	const isMobile = useMediaQuery(mobile)

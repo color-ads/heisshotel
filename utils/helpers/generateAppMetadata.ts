@@ -1,10 +1,10 @@
-import { Seo } from 'utils/types/graphql/graphql'
+/* import { Seo } from 'utils/types/graphql/graphql' */
 
 export const generateAppMetadata = ({
 	seo,
 	lang,
 }: {
-	seo: Seo
+	seo: /* Seo */ any
 	lang: string
 }) => {
 	return {
