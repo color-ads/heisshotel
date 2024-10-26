@@ -2,15 +2,32 @@
 
 .alliances {
 	--max-width: 1300px;
-	&__img {
-		width: 100%;
-		height: 25vh;
-		object-fit: cover;
-		vertical-align: top;
-	}
 	&__controls {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		gap: 2rem;
 		padding: 50px;
-		padding-bottom: 0;
+		min-height: 70vh;
+		position: relative;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			z-index: 2;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-backdrop-filter: blur(40px);
+			backdrop-filter: blur(40px);
+			-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+			mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+			background: linear-gradient(to bottom, transparent 0%, black 70%);
+		}
 		@include mobile {
 			padding: 50px 20px;
 		}
@@ -23,6 +40,7 @@
 			color: #fff;
 			max-width: 1100px;
 			margin: 0 auto;
+			z-index: 3;
 			@include mobile {
 				font-size: 20px;
 				line-height: 34.55px;
@@ -36,9 +54,9 @@
 			width: 100%;
 			padding: 0 2rem;
 			max-width: var(--max-width);
-			transform: translateY(3rem);
+			z-index: 3;
 			@include mobile {
-				grid-template-columns: repeat(2, 1fr);
+				grid-template-columns: 1fr;
 				gap: 20px;
 				transform: none;
 				padding: 0;
@@ -46,11 +64,11 @@
 			}
 			&__item {
 				display: flex;
-				flex-direction: column;
 				align-items: center;
 				justify-content: center;
 				background: #3a3a3a;
-				border-radius: 16px;
+				border-radius: 6px;
+				gap: 16px;
 				border: none;
 				cursor: pointer;
 				padding: 1rem;
@@ -68,16 +86,12 @@
 					background: #616161;
 				}
 				&.active {
-					background: #fff;
-					color: #3a3a3a;
+					background: hsl(var(--secondary));
 				}
 				&__img {
-					height: 150px;
+					height: 50px;
 					pointer-events: none;
 					user-select: none;
-					@include mobile {
-						height: 100px;
-					}
 				}
 			}
 		}
@@ -88,7 +102,7 @@
 			width: 100%;
 			max-width: var(--max-width);
 			margin: 0 auto;
-			padding: 110px 2rem;
+			padding: 2rem;
 			border-bottom-left-radius: 100px;
 			border-bottom-right-radius: 100px;
 			@include mobile {
@@ -129,7 +143,7 @@
 		grid-template-columns: 1fr 1fr;
 		column-gap: 78px;
 		row-gap: 24px;
-		grid-template-areas: 'input empty' 'map list';
+		grid-template-areas: 'input map' 'list map';
 		@include mobile {
 			grid-template-columns: 1fr;
 			grid-template-areas: 'input' 'map' 'list';
@@ -141,8 +155,7 @@
 			width: 100%;
 			overflow: hidden;
 			grid-area: input;
-			position: sticky;
-			top: 141px;
+			position: relative;
 			background: #151515;
 			@include mobile {
 				position: relative;
@@ -175,12 +188,12 @@
 			}
 		}
 		&__map {
-			height: 60vh;
+			height: 70vh;
 			overflow: hidden;
-			border-radius: 20px;
+			border-radius: 6px;
 			grid-area: map;
 			position: sticky;
-			top: 219px;
+			top: 150px;
 			@include mobile {
 				height: 400px;
 				position: initial;
@@ -236,17 +249,18 @@
 			width: 90%;
 			max-width: 900px;
 			display: grid;
-			grid-template-columns: 1fr 2fr;
-			background: #f7f7f7;
-			border-radius: 40px;
+			grid-template-columns: 2fr 1fr;
+			background-color: #151515;
+			backdrop-filter: saturate(180%) blur(5px);
+			border-radius: 6px;
 			animation: modal 0.5s;
 			@include mobile {
 				grid-template-columns: 1fr;
 			}
 			&__left {
-				background: #121212;
-				box-shadow: 6px 6px 8.3px 2px #00000040;
 				border-radius: inherit;
+				border-bottom-left-radius: 0;
+				border-top-left-radius: 0;
 				color: #fff;
 				&__img {
 					width: 100%;
@@ -265,7 +279,6 @@
 						font-weight: 600;
 					}
 					&__line {
-						border-top: 1px dashed #fff;
 						margin: 1rem 0;
 					}
 					&__phone {
@@ -290,23 +303,30 @@
 			}
 			&__right {
 				padding: 2rem;
-				padding-top: 4rem;
 				display: grid;
-				justify-items: right;
+				justify-items: center;
 				grid-template-rows: auto 1fr;
 				gap: 1rem;
 				@include mobile {
 					display: none;
 				}
 				&__logo {
-					height: 4rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background-color: #fff;
+					border-radius: 100px;
+					padding: 0.5rem;
+					overflow: hidden;
+					&__img {
+						height: 4rem;
+					}
 				}
 				&__map {
 					height: 100%;
 					width: 100%;
-					border-radius: 40px;
+					border-radius: 6px;
 					overflow: hidden;
-					box-shadow: 0px 4px 4px 0px #00000040;
 				}
 			}
 			&__close {
@@ -317,6 +337,8 @@
 				background: none;
 				border: none;
 				cursor: pointer;
+				background-color: #fff;
+				border-radius: 50%;
 				@include mobile {
 					background: #fff;
 					border-radius: 50%;
