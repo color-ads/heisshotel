@@ -2,7 +2,7 @@
 import { /* Allies, Ally, */ Maybe } from 'utils/types/graphql/graphql'
 import s from './page.module.scss'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import AllyCard from 'components/AllyCard/AllyCard'
+import AllyCard from '@/components/AllyCard'
 import { IoClose } from 'react-icons/io5'
 import { FaSquarePhone } from 'react-icons/fa6'
 import { FaCheck } from 'react-icons/fa'
@@ -16,7 +16,7 @@ import {
 	useMap,
 } from '@vis.gl/react-google-maps'
 import { IoIosSearch } from 'react-icons/io'
-import AllyCardMap from 'components/AllyCardMap/AllyCardMap'
+import AllyCardMap from '@/components/AllyCardMap'
 import type { Marker as MarkerType } from '@googlemaps/markerclusterer'
 import { mapId } from 'utils/constants'
 import { FiMapPin, FiPhone } from 'react-icons/fi'
@@ -100,14 +100,10 @@ const Component = ({ data }: { data: any }) => {
 
 	return (
 		<main className={s.alliances}>
-			{data.image?.url && (
-				<img
-					src={data.image?.url}
-					alt="Alliances"
-					className={s.alliances__img}
-				/>
-			)}
-			<section className={s.alliances__controls}>
+			<section
+				className={s.alliances__controls}
+				style={{ backgroundImage: `url(${data.image?.url})` }}
+			>
 				<p className={s.alliances__controls__description}>{data.description}</p>
 				<div className={s.alliances__controls__buttons}>
 					<button
@@ -282,6 +278,38 @@ const Component = ({ data }: { data: any }) => {
 					<div className={s.alliances__modal}>
 						<div className={s.alliances__modal__overlay} onClick={closeModal} />
 						<div className={s.alliances__modal__content}>
+							<div className={s.alliances__modal__content__right}>
+								{currentAlly.logo?.url && (
+									<div className={s.alliances__modal__content__right__logo}>
+										<img
+											src={currentAlly.logo?.url}
+											alt={`${currentAlly?.name} Logo`}
+											className={s.alliances__modal__content__right__logo__img}
+										/>
+									</div>
+								)}
+								{currentAlly.location?.lat && currentAlly.location?.lon && (
+									<MapGoogle
+										className={s.alliances__modal__content__right__map}
+										defaultCenter={{
+											lat: currentAlly.location?.lat,
+											lng: currentAlly.location?.lon,
+										}}
+										defaultZoom={18}
+										scrollwheel={false}
+										mapTypeControl={false}
+										fullscreenControl={false}
+										streetViewControl={false}
+									>
+										<Marker
+											position={{
+												lat: currentAlly.location?.lat,
+												lng: currentAlly.location?.lon,
+											}}
+										/>
+									</MapGoogle>
+								)}
+							</div>
 							<div className={s.alliances__modal__content__left}>
 								{currentAlly.image?.url && (
 									<img
@@ -324,36 +352,7 @@ const Component = ({ data }: { data: any }) => {
 									</ul>
 								</div>
 							</div>
-							<div className={s.alliances__modal__content__right}>
-								{currentAlly.logo?.url && (
-									<img
-										src={currentAlly.logo?.url}
-										alt={`${currentAlly?.name} Logo`}
-										className={s.alliances__modal__content__right__logo}
-									/>
-								)}
-								{currentAlly.location?.lat && currentAlly.location?.lon && (
-									<MapGoogle
-										className={s.alliances__modal__content__right__map}
-										defaultCenter={{
-											lat: currentAlly.location?.lat,
-											lng: currentAlly.location?.lon,
-										}}
-										defaultZoom={18}
-										scrollwheel={false}
-										mapTypeControl={false}
-										fullscreenControl={false}
-										streetViewControl={false}
-									>
-										<Marker
-											position={{
-												lat: currentAlly.location?.lat,
-												lng: currentAlly.location?.lon,
-											}}
-										/>
-									</MapGoogle>
-								)}
-							</div>
+
 							<button
 								onClick={closeModal}
 								aria-label="Cerrar modal"

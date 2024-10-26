@@ -1,6 +1,6 @@
 # Heiss Hotel
 
-Bienvenido al repositorio del proyecto de Heiss Hotel. Este proyecto utiliza Next.js para desarrollar un sitio web moderno, rápido y optimizado para motores de búsqueda. La información y el contenido del sitio web son gestionados mediante Contentful, un CMS headless que facilita la administración y actualización de contenido
+Bienvenido al repositorio del proyecto de Heiss Hotel. Este proyecto utiliza Next.js para desarrollar un sitio web moderno, rápido y optimizado para motores de búsqueda. La información y el contenido del sitio web son gestionados mediante Contentful, un CMS headless que facilita la administración y actualización de contenido.
 
 ## Características
 
